@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9635bc4f7af34e788605f0ed3af92cfc" Name="Diagram1">
+        <EntityTypeShape EntityType="BD_PANADERIAModel.BOLETA" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.CARGO" Width="1.5" PointX="5.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.CLIENTES" Width="1.5" PointX="1.5" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.DETALLE_INSUMO_PROVEEDOR" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.DETALLE_PEDIDO" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.EMPLEADO" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.INSUMOS" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.PEDIDO" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.PRODUCTO" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.PROVEEDOR" Width="1.5" PointX="3.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.RECETA" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.sysdiagrams" Width="1.5" PointX="8.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BD_PANADERIAModel.VENTA_MENOR" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <AssociationConnector Association="BD_PANADERIAModel.R_12" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_PANADERIAModel.R_7" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_PANADERIAModel.R_13" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_PANADERIAModel.R_15" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_PANADERIAModel.R_16" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_PANADERIAModel.R_11" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_PANADERIAModel.R_8" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_PANADERIAModel.R_14" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_PANADERIAModel.FK__VENTA_MEN__IDPRO__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="BD_PANADERIAModel.R_9" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

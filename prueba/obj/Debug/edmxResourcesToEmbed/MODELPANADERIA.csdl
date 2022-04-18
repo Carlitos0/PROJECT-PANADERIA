@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BD_PANADERIAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BOLETA">
+    <Key>
+      <PropertyRef Name="IDBOLETA" />
+    </Key>
+    <Property Name="IDBOLETA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDPEDIDO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PEDIDO" Relationship="Self.R_12" FromRole="BOLETA" ToRole="PEDIDO" />
+  </EntityType>
+  <EntityType Name="CARGO">
+    <Key>
+      <PropertyRef Name="IDCARGO" />
+    </Key>
+    <Property Name="IDCARGO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CARGO1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="EMPLEADO" Relationship="Self.R_7" FromRole="CARGO" ToRole="EMPLEADO" />
+  </EntityType>
+  <EntityType Name="CLIENTES">
+    <Key>
+      <PropertyRef Name="IDCLIENTES" />
+    </Key>
+    <Property Name="IDCLIENTES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RAZONSOCIAL" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="RUC" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+    <Property Name="DIRECCION" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="DISTRITO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="PEDIDO" Relationship="Self.R_13" FromRole="CLIENTES" ToRole="PEDIDO" />
+  </EntityType>
+  <EntityType Name="DETALLE_INSUMO_PROVEEDOR">
+    <Key>
+      <PropertyRef Name="IDDETALLE" />
+    </Key>
+    <Property Name="IDDETALLE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="STOCK_Kg_" Type="Double" />
+    <Property Name="PRECIO" Type="Double" />
+    <Property Name="FECHA_PRODUCCION" Type="DateTime" Precision="3" />
+    <Property Name="FECHA_VENCIMIENTO" Type="DateTime" Precision="3" />
+    <Property Name="IDPROVEEDOR" Type="Int32" Nullable="false" />
+    <Property Name="IDINSUMOS" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PROVEEDOR" Relationship="Self.R_15" FromRole="DETALLE_INSUMO_PROVEEDOR" ToRole="PROVEEDOR" />
+    <NavigationProperty Name="INSUMOS" Relationship="Self.R_16" FromRole="DETALLE_INSUMO_PROVEEDOR" ToRole="INSUMOS" />
+  </EntityType>
+  <EntityType Name="DETALLE_PEDIDO">
+    <Key>
+      <PropertyRef Name="IDDETALLE_PEDIDO" />
+    </Key>
+    <Property Name="IDDETALLE_PEDIDO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CANTIDAD" Type="Double" Nullable="false" />
+    <Property Name="IDPRODUCTO" Type="Int32" Nullable="false" />
+    <Property Name="IDPEDIDO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PEDIDO" Relationship="Self.R_11" FromRole="DETALLE_PEDIDO" ToRole="PEDIDO" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Self.R_8" FromRole="DETALLE_PEDIDO" ToRole="PRODUCTO" />
+  </EntityType>
+  <EntityType Name="EMPLEADO">
+    <Key>
+      <PropertyRef Name="CODEMPLEADO" />
+    </Key>
+    <Property Name="CODEMPLEADO" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="APELLIDOS" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="NOMBRES" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="DNI" Type="Int16" />
+    <Property Name="DIRECCION" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="IDCARGO" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="CARGO" Relationship="Self.R_7" FromRole="EMPLEADO" ToRole="CARGO" />
+  </EntityType>
+  <EntityType Name="INSUMOS">
+    <Key>
+      <PropertyRef Name="IDINSUMOS" />
+    </Key>
+    <Property Name="IDINSUMOS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="INSUMO" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DETALLE_INSUMO_PROVEEDOR" Relationship="Self.R_16" FromRole="INSUMOS" ToRole="DETALLE_INSUMO_PROVEEDOR" />
+    <NavigationProperty Name="RECETA" Relationship="Self.R_14" FromRole="INSUMOS" ToRole="RECETA" />
+  </EntityType>
+  <EntityType Name="PEDIDO">
+    <Key>
+      <PropertyRef Name="IDPEDIDO" />
+    </Key>
+    <Property Name="IDPEDIDO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDCLIENTES" Type="Int32" />
+    <Property Name="FECHA_ENTREGA" Type="DateTime" Precision="3" />
+    <Property Name="FECHA_EMISION" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="BOLETA" Relationship="Self.R_12" FromRole="PEDIDO" ToRole="BOLETA" />
+    <NavigationProperty Name="CLIENTES" Relationship="Self.R_13" FromRole="PEDIDO" ToRole="CLIENTES" />
+    <NavigationProperty Name="DETALLE_PEDIDO" Relationship="Self.R_11" FromRole="PEDIDO" ToRole="DETALLE_PEDIDO" />
+  </EntityType>
+  <EntityType Name="PRODUCTO">
+    <Key>
+      <PropertyRef Name="IDPRODUCTO" />
+    </Key>
+    <Property Name="IDPRODUCTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRIPCION" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DETALLE_PEDIDO" Relationship="Self.R_8" FromRole="PRODUCTO" ToRole="DETALLE_PEDIDO" />
+    <NavigationProperty Name="VENTA_MENOR" Relationship="Self.FK__VENTA_MEN__IDPRO__5CD6CB2B" FromRole="PRODUCTO" ToRole="VENTA_MENOR" />
+    <NavigationProperty Name="RECETA" Relationship="Self.R_9" FromRole="PRODUCTO" ToRole="RECETA" />
+  </EntityType>
+  <EntityType Name="PROVEEDOR">
+    <Key>
+      <PropertyRef Name="IDPROVEEDOR" />
+    </Key>
+    <Property Name="IDPROVEEDOR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PROVEEDOR1" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DETALLE_INSUMO_PROVEEDOR" Relationship="Self.R_15" FromRole="PROVEEDOR" ToRole="DETALLE_INSUMO_PROVEEDOR" />
+  </EntityType>
+  <EntityType Name="RECETA">
+    <Key>
+      <PropertyRef Name="IDRECETA" />
+    </Key>
+    <Property Name="IDRECETA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CANTIDAD" Type="Double" />
+    <Property Name="IDPRODUCTO" Type="Int32" Nullable="false" />
+    <Property Name="IDINSUMOS" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="INSUMOS" Relationship="Self.R_14" FromRole="RECETA" ToRole="INSUMOS" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Self.R_9" FromRole="RECETA" ToRole="PRODUCTO" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="VENTA_MENOR">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDPRODUCTO" Type="Int32" Nullable="false" />
+    <Property Name="CANTIDAD" Type="Int32" />
+    <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__VENTA_MEN__IDPRO__5CD6CB2B" FromRole="VENTA_MENOR" ToRole="PRODUCTO" />
+  </EntityType>
+  <Association Name="R_12">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="BOLETA" Type="Self.BOLETA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="BOLETA">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_7">
+    <End Role="CARGO" Type="Self.CARGO" Multiplicity="1" />
+    <End Role="EMPLEADO" Type="Self.EMPLEADO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CARGO">
+        <PropertyRef Name="IDCARGO" />
+      </Principal>
+      <Dependent Role="EMPLEADO">
+        <PropertyRef Name="IDCARGO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_13">
+    <End Role="CLIENTES" Type="Self.CLIENTES" Multiplicity="0..1" />
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CLIENTES">
+        <PropertyRef Name="IDCLIENTES" />
+      </Principal>
+      <Dependent Role="PEDIDO">
+        <PropertyRef Name="IDCLIENTES" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_15">
+    <End Role="PROVEEDOR" Type="Self.PROVEEDOR" Multiplicity="1" />
+    <End Role="DETALLE_INSUMO_PROVEEDOR" Type="Self.DETALLE_INSUMO_PROVEEDOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PROVEEDOR">
+        <PropertyRef Name="IDPROVEEDOR" />
+      </Principal>
+      <Dependent Role="DETALLE_INSUMO_PROVEEDOR">
+        <PropertyRef Name="IDPROVEEDOR" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_16">
+    <End Role="INSUMOS" Type="Self.INSUMOS" Multiplicity="1" />
+    <End Role="DETALLE_INSUMO_PROVEEDOR" Type="Self.DETALLE_INSUMO_PROVEEDOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INSUMOS">
+        <PropertyRef Name="IDINSUMOS" />
+      </Principal>
+      <Dependent Role="DETALLE_INSUMO_PROVEEDOR">
+        <PropertyRef Name="IDINSUMOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_11">
+    <End Role="PEDIDO" Type="Self.PEDIDO" Multiplicity="1" />
+    <End Role="DETALLE_PEDIDO" Type="Self.DETALLE_PEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Principal>
+      <Dependent Role="DETALLE_PEDIDO">
+        <PropertyRef Name="IDPEDIDO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_8">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="DETALLE_PEDIDO" Type="Self.DETALLE_PEDIDO" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Principal>
+      <Dependent Role="DETALLE_PEDIDO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_14">
+    <End Role="INSUMOS" Type="Self.INSUMOS" Multiplicity="1" />
+    <End Role="RECETA" Type="Self.RECETA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="INSUMOS">
+        <PropertyRef Name="IDINSUMOS" />
+      </Principal>
+      <Dependent Role="RECETA">
+        <PropertyRef Name="IDINSUMOS" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__VENTA_MEN__IDPRO__5CD6CB2B">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="VENTA_MENOR" Type="Self.VENTA_MENOR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Principal>
+      <Dependent Role="VENTA_MENOR">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="R_9">
+    <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="1" />
+    <End Role="RECETA" Type="Self.RECETA" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PRODUCTO">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Principal>
+      <Dependent Role="RECETA">
+        <PropertyRef Name="IDPRODUCTO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BD_PANADERIA" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BOLETA" EntityType="Self.BOLETA" />
+    <EntitySet Name="CARGO" EntityType="Self.CARGO" />
+    <EntitySet Name="CLIENTES" EntityType="Self.CLIENTES" />
+    <EntitySet Name="DETALLE_INSUMO_PROVEEDOR" EntityType="Self.DETALLE_INSUMO_PROVEEDOR" />
+    <EntitySet Name="DETALLE_PEDIDO" EntityType="Self.DETALLE_PEDIDO" />
+    <EntitySet Name="EMPLEADO" EntityType="Self.EMPLEADO" />
+    <EntitySet Name="INSUMOS" EntityType="Self.INSUMOS" />
+    <EntitySet Name="PEDIDO" EntityType="Self.PEDIDO" />
+    <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" />
+    <EntitySet Name="PROVEEDOR" EntityType="Self.PROVEEDOR" />
+    <EntitySet Name="RECETA" EntityType="Self.RECETA" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="VENTA_MENOR" EntityType="Self.VENTA_MENOR" />
+    <AssociationSet Name="R_12" Association="Self.R_12">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="BOLETA" EntitySet="BOLETA" />
+    </AssociationSet>
+    <AssociationSet Name="R_7" Association="Self.R_7">
+      <End Role="CARGO" EntitySet="CARGO" />
+      <End Role="EMPLEADO" EntitySet="EMPLEADO" />
+    </AssociationSet>
+    <AssociationSet Name="R_13" Association="Self.R_13">
+      <End Role="CLIENTES" EntitySet="CLIENTES" />
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="R_15" Association="Self.R_15">
+      <End Role="PROVEEDOR" EntitySet="PROVEEDOR" />
+      <End Role="DETALLE_INSUMO_PROVEEDOR" EntitySet="DETALLE_INSUMO_PROVEEDOR" />
+    </AssociationSet>
+    <AssociationSet Name="R_16" Association="Self.R_16">
+      <End Role="INSUMOS" EntitySet="INSUMOS" />
+      <End Role="DETALLE_INSUMO_PROVEEDOR" EntitySet="DETALLE_INSUMO_PROVEEDOR" />
+    </AssociationSet>
+    <AssociationSet Name="R_11" Association="Self.R_11">
+      <End Role="PEDIDO" EntitySet="PEDIDO" />
+      <End Role="DETALLE_PEDIDO" EntitySet="DETALLE_PEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="R_8" Association="Self.R_8">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="DETALLE_PEDIDO" EntitySet="DETALLE_PEDIDO" />
+    </AssociationSet>
+    <AssociationSet Name="R_14" Association="Self.R_14">
+      <End Role="INSUMOS" EntitySet="INSUMOS" />
+      <End Role="RECETA" EntitySet="RECETA" />
+    </AssociationSet>
+    <AssociationSet Name="FK__VENTA_MEN__IDPRO__5CD6CB2B" Association="Self.FK__VENTA_MEN__IDPRO__5CD6CB2B">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="VENTA_MENOR" EntitySet="VENTA_MENOR" />
+    </AssociationSet>
+    <AssociationSet Name="R_9" Association="Self.R_9">
+      <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+      <End Role="RECETA" EntitySet="RECETA" />
+    </AssociationSet>
+    <FunctionImport Name="OBTENER_NOMBRE_PROVEEDOR" ReturnType="Collection(String)">
+      <Parameter Name="id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(BD_PANADERIAModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(BD_PANADERIAModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>
